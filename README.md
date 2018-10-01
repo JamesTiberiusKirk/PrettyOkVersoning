@@ -7,7 +7,7 @@ This bash script is for a module assignment in University of Dundee.
 - [] Consider the basic structure of the scripts (how they are structured)
     - I think we should make it argument based (minimize the use of menus)
     - Whatever way we go, the script should be able to create/delete repos
-    - [x] Create a basic layout of all of the files
+    - [x] Create a basic layout of all of the script files
 - [] A way to add new files
 - [] Create a logging system
     - [] detect when a file was accessed and automatically log it
