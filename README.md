@@ -2,7 +2,6 @@
 This bash script is for a module assignment in University of Dundee.  
 
 ## TODO:  
-This is to vauge haha
 ### Standard Functionality  
 The minimal functionality that your solution should be able to demonstrate is:  
 - [] a menu front end (individual scripts are also acceptable)
