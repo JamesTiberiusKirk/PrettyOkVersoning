@@ -2,7 +2,20 @@
 This bash script is for a module assignment in University of Dundee.  
 
 ## TODO:  
-### Standard Functionality  
+### Tasks:
+- [] Create a file repository 
+- [] Consider the basic structure of the scripts (how they are structured)
+- [] A way to add new files
+- [] Create a logging system
+    - [] detect when a file was accessed and automatically log it
+    - [] the log should contain other details such as who accessed it, when, and what part of the file were modified
+- [] Make a checking in/out system, where it lets other devs know that the file is being worked on
+    - [] Multiple devs working on the same file will be an advanced feature
+
+
+
+### Features (From the assignment brief):
+#### Standard Functionality  
 The minimal functionality that your solution should be able to demonstrate is:  
 - [] a menu front end (individual scripts are also acceptable)
 - [] access a file repository
@@ -10,7 +23,7 @@ The minimal functionality that your solution should be able to demonstrate is:
 - [] logging a file out of the repository, and back in again
 - [] creation of a log file with updates  
 
-### Simple Extensions  
+#### Simple Extensions  
 There are many possible extensions that you could pursue, such as:  
 - [] multi-level menus
 - [] allowing access to multiple repositories (accessed by name)
@@ -20,7 +33,7 @@ There are many possible extensions that you could pursue, such as:
 - [] optionally adding user comments into log entries
 - [] automatically making backup copies of each file which is edited  
 
-### Further Extensions  
+#### Further Extensions  
 More advanced extensions could include:  
 - [] providing secure access to sets of files, exploiting the user ID and group ID stored by UNIX (you may need to arrange to have several accounts created for you to test this extension)
 - [] roll back i.e. return to an earlier version of the file(s), either by undoing the edits or by restoring an earlier version of the file(s)
