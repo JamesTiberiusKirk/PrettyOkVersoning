@@ -5,12 +5,16 @@ This bash script is for a module assignment in University of Dundee.
 ### Tasks:
 - [] Create a file repository 
 - [] Consider the basic structure of the scripts (how they are structured)
+    - I think we should make it argument based (minimize the use of menus)
+    - Whatever way we go, the script should be able to create/delete repos
 - [] A way to add new files
 - [] Create a logging system
     - [] detect when a file was accessed and automatically log it
-    - [] the log should contain other details such as who accessed it, when, and what part of the file were modified
+    - [] the log should contain other details such as who accessed it, when, why, and what part of the file were modified
 - [] Make a checking in/out system, where it lets other devs know that the file is being worked on
     - [] Multiple devs working on the same file will be an advanced feature
+- [] Users should be able to add other used to the contributors lists
+
 
 
 
