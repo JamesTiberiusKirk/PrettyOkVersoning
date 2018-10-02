@@ -6,11 +6,11 @@
 #Also gonna add a --help option here
 
 
-PATH =  "./components/"
-USER =  $PATH+"user.sh"
-FILE =  $PATH+"file.sh"
-LOG =   $PATH+"log.sh"
-CHECK = $PATH+"check.sh"
+# PATH =  "./components/"
+# USER =  $PATH+"user.sh"
+# FILE =  $PATH+"file.sh"
+# LOG =   $PATH+"log.sh"
+# CHECK = $PATH+"check.sh"
 
 
 printHelp(){
@@ -22,15 +22,18 @@ printHelp(){
 #Need to properly research how im meant to use arguments 
 #and look into flags
 
-if [ $# -ne 1]
-then 
-    echo "Please enter command parameters"
-    printHelp
-exit 1
-fi
+#THIS IS HOW TO PROCESS FLATS AND FLAG OPTIONS
+#just need to figure out how im structuring the use of the program
 
-if [ $1 == "-p" | $1 == "--path"]
-then
-    $PATH $2 $3 $4 $5 $6 $7 $8 $9
-exit 0
-fi
+while getopts v:t: aflag; do
+    case $aflag in 
+        v) verbosity=$OPTARG;;
+        t) tone=$OPTARG;;
+        *) help;;
+    esac
+done
+
+echo "the verbosity is ${verbosity} and the tone is ${tone} ..."
+
+
+

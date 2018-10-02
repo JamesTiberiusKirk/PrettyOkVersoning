@@ -16,9 +16,6 @@ This bash script is for a module assignment in University of Dundee.
     - [] Multiple devs working on the same file will be an advanced feature
 - [] Users should be able to add other used to the contributors lists
 
-
-
-
 ### Features (From the assignment brief):
 #### Standard Functionality  
 The minimal functionality that your solution should be able to demonstrate is:  
