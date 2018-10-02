@@ -6,11 +6,11 @@
 #Also gonna add a --help option here
 
 
-# PATH =  "./components/"
-# USER =  $PATH+"user.sh"
-# FILE =  $PATH+"file.sh"
-# LOG =   $PATH+"log.sh"
-# CHECK = $PATH+"check.sh"
+COMPPATH="./components/"
+USER="${COMPPATH}user.sh"
+FILE="${COMPPATH}file.sh"
+LOG="${COMPPATH}log.sh"
+CHECK="${COMPPATH}check.sh"
 
 
 printHelp(){
@@ -34,6 +34,7 @@ while getopts v:t: aflag; do
 done
 
 echo "the verbosity is ${verbosity} and the tone is ${tone} ..."
+
 
 
 
