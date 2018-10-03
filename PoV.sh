@@ -24,20 +24,25 @@ printHelp(){
 #THIS IS HOW TO PROCESS FLATS AND FLAG OPTIONS
 #just need to figure out how im structuring the use of the program
 
+case $1 in
+    file) sh $FILE $2 $3 $4 $5;; ./PoV.sh file file1 file2
+    f) sh $FILE $2 $3 $4 $5;;
+    
+    user) sh $USER $2 $3 $4 $5;;
+    u) sh $USER $2 $3 $4 $5;;
+    
+    log) sh $LOG $2 $3 $4 $5;;
+    l) sh $LOG $2 $3 $4 $5;;
+    
+    check) sh $CHECK $2 $3 $4 $5;;
+    c) sh $CHECK $2 $3 $4 $5;;
 
-while getopts v:t:h-help aflag; do
+    push) sh $REPO -p
+esac
+
+while getopts h-help aflag; do
     case $aflag in 
-        v) verbosity=$OPTARG;;
-        t) tone=$OPTARG;;
         h) printHelp;;
         -help) printHelp;;
     esac
 done
-
-echo "the verbosity is ${verbosity} and the tone is ${tone} ..."
-
-echo "Testing the check script..."
-sh $USER $1
-
-
-
