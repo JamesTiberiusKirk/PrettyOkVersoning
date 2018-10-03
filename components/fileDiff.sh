@@ -25,12 +25,13 @@ neg="n"
 
 echo "Would you like to view the conflicts? [Y/n]"
 read choice
+echo "The choice is: $choice"
 
-if [ "${choice}" == "Y" ]
+if [ "$choice" == "Y" ]
 then
 	vimdiff -c --report-identical-files "file1" "file2"
 fi
-if [ "${choice}" == "n" ]
+if [ "$choice" == "n" ]
 then
 differenceVar= "$(vimdiff -c --report-identical-files "file1" "file2")"
 fi
