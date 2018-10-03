@@ -17,7 +17,20 @@ while getopts h-help aflag; do
 done
 
 
-file1= $1;
-file2= $2;
+file1="${1}"
+file2="${2}"
+choice="Y"
+pos="Y"
+neg="n"
 
-diff -c --report-identical-files file1 file2
+echo "Would you like to view the conflicts? [Y/n]"
+read choice
+
+if [ "${choice}" == "Y" ]
+then
+	vimdiff -c --report-identical-files "file1" "file2"
+fi
+if [ "${choice}" == "n" ]
+then
+differenceVar= "$(vimdiff -c --report-identical-files "file1" "file2")"
+fi
