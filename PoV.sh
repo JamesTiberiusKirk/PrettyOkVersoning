@@ -11,21 +11,18 @@ USER="${COMPPATH}user.sh"
 FILE="${COMPPATH}file.sh"
 LOG="${COMPPATH}log.sh"
 CHECK="${COMPPATH}check.sh"
+REPO="${COMPPATH}repo.sh"
+TRACK_LOG="repoTrack.log"
+REPO_DIR="${HOME}/repositories/"
+FILES_LIST="fileList"
+
 
 printHelp(){
     echo "Welcome to the PrettyOkVersioning"
 }
 
-###TODO:
-#I dont actually know what im doing here yet!!!!
-#Need to properly research how im meant to use arguments 
-#and look into flags
-
-#THIS IS HOW TO PROCESS FLATS AND FLAG OPTIONS
-#just need to figure out how im structuring the use of the program
-
 case $1 in
-    file) sh $FILE $2 $3 $4 $5;; ./PoV.sh file file1 file2
+    file) sh $FILE $2 $3 $4 $5;;
     f) sh $FILE $2 $3 $4 $5;;
     
     user) sh $USER $2 $3 $4 $5;;
