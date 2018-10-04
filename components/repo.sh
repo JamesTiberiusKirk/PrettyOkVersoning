@@ -60,5 +60,13 @@ function pull(){
 }
 
 function add(){
+    if [[ ! -a $NEW_FILE]]
+    then
+        echo "File or directory doesnt exist.\nPlease give the path to an existing file or directory you want to include into the repository."
+        exit 1
+    fi
+    
+    #TODO: need to go line by line reading all of items in the $FILE_LIST and see if filename exists there
 
+    cat "${NEW_FILE}\n">$DIR/$FILES_LISTs
 }
