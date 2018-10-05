@@ -33,18 +33,20 @@ function newRepo(){
     #It should also take care of the posibility if the dir is a file
     if [[ -a $DIR]]
     then
-        echo "File or directory exists.\nPlease give the path to a directory you want to create."
+        echo "File or directory exists.
+        Please give the path to a directory you want to create."
         exit 1
     fi
     
     #Checking is the new repo name already exists
     if [[-a $REPO_DIR/$(basename $DIR)]]
     then
-        echo "Repository already exists.\nPlease provide a unique name."
+        echo "Repository already exists.
+        Please provide a unique name."
         exit 1
     fi
     
-    #Creating a new directory for the repo 
+    #Creating a new directories for the repo 
     mkdir $DIR
     mkdir $REPO_DIR/$(basename $DIR)
     touch $DIR/$TRACK_LOG
@@ -62,11 +64,26 @@ function pull(){
 function add(){
     if [[ ! -a $NEW_FILE]]
     then
-        echo "File or directory doesnt exist.\nPlease give the path to an existing file or directory you want to include into the repository."
+        echo "File or directory doesnt exist.
+        Please give the path to an existing file or directory you want to include into the repository."
         exit 1
     fi
     
-    #TODO: need to go line by line reading all of items in the $FILE_LIST and see if filename exists there
+    while read LINE
+        if[[ $NEW_FILE == $LINE]]
+        then 
+            echo "File already exists in the repository, please enter a unique name/path."
+            exit 1
+    done < $FILE_LIST
 
-    cat "${NEW_FILE}\n">$DIR/$FILES_LISTs
+    cat "${NEW_FILE}\n">$DIR/$FILES_LIST
+
+    echo "Would you like to push so that the file is included in the reposotory? 
+    [Y/n]"
+    option="Y"
+    read $option
+    if[[$option == Y -o $option == y ]]
+    then 
+        push;;
+    fi
 }

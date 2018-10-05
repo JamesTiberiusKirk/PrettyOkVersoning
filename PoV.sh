@@ -18,7 +18,16 @@ FILES_LIST="fileList"
 
 
 printHelp(){
-    echo "Welcome to the PrettyOkVersioning"
+    HELP_MAIN= "\
+    Welcome to the Pretty OK Versioning system.
+    Usage:
+      ./PoV.sh [option] [flags]
+    Options and their flags:
+      repo
+        -n [name] for a new repo
+        -a [file/directory name] to add a file to the version tracking
+    "
+    echo $HELP_MAIN
 }
 
 case $1 in
