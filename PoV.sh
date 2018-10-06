@@ -13,11 +13,11 @@ LOG="${COMPPATH}log.sh"
 CHECK="${COMPPATH}check.sh"
 REPO="${COMPPATH}repo.sh"
 TRACK_LOG="repoTrack.log"
-REPO_DIR="${HOME}/repositories/"
+REPO_STORE="${HOME}/repositories/"
 FILES_LIST="fileList"
 
 
-printHelp(){
+function printHelp(){
     HELP_MAIN= "\
     Welcome to the Pretty OK Versioning system.
     Usage:
@@ -43,12 +43,24 @@ case $1 in
     check) sh $CHECK $2 $3 $4 $5;;
     c) sh $CHECK $2 $3 $4 $5;;
 
-    push) sh $REPO -p
+    push) sh $REPO -p;;
 esac
 
-while getopts h-help aflag; do
+while getopts u:h-help aflag; do
     case $aflag in 
         h) printHelp;;
         -help) printHelp;;
+        -u) 
+            REPO_SELECT=$OPTARGS
+            checkRepo;;
     esac
 done
+
+function checkRepo(){
+    if[[ ! -d $REPO_SELECT]]
+    then 
+        echo "Please enter an existing repository or create a new one."
+        exit 1
+    fi
+    echo "Repository ${REPO_SELECT} selected"
+}

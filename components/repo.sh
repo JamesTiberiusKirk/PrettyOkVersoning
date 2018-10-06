@@ -74,6 +74,7 @@ function add(){
         then 
             echo "File already exists in the repository, please enter a unique name/path."
             exit 1
+        fi
     done < $FILE_LIST
 
     cat "${NEW_FILE}\n">$DIR/$FILES_LIST

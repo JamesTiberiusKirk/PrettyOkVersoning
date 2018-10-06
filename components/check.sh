@@ -5,7 +5,7 @@
 echo "This is ${0}"
 
 
-printHelp(){
+function printHelp(){
     echo "This is file component"
 }
 
