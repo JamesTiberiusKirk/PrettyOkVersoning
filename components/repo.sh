@@ -54,11 +54,17 @@ function newRepo(){
 }
 
 function push(){
-    sh $CHECK 
+    #Check which file from user are different to the repo
+    #Let the user know that a certain file has a missing line, removed line or a confligt.
+        #in case of a confligt, exit the function and let user deal with confligt
+    #Copy the modified files from users local repo to the repo storage
 }
 
 function pull(){
-
+    #Check which file from repo are different to user
+    #Let the user know that a certain file has a missing line, removed line or a confligt.
+        #in case of a confligt, exit the function and let user deal with confligt
+    #Copy the modified files from users local repo to the repo storage
 }
 
 function add(){

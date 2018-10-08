@@ -60,6 +60,7 @@ function checkRepo(){
     if[[ ! -d $REPO_SELECT]]
     then 
         echo "Please enter an existing repository or create a new one."
+        REPO_SELECT=""
         exit 1
     fi
     echo "Repository ${REPO_SELECT} selected"
