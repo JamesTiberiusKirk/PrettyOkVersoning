@@ -1,8 +1,9 @@
 #!/bin/bash
 
 #This will be used for the logging system.
-
  Desktop=/components/logNames.txt
+
+source fileDiff.sh
 
 echo "This is ${0}"
 
@@ -10,10 +11,10 @@ echo "This is ${0}"
 usrName=""
 modDate=""
 
-
   usrName=$USER
   modDate=$(date)
-
+  
+  
 
 function usrLogs{
 	
@@ -24,7 +25,7 @@ function usrLogs{
 
 	echo "$modDate">>"$Desktop"
 
-	echo "$diffvallue" >> "$Desktop"
+	echo "differenceVar" >> "$Desktop"
 	
 
 	echo "Changes has been made to the log file " 
