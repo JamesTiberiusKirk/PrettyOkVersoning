@@ -1,9 +1,8 @@
 #!/bin/bash
 
-#This will be used for the logging system.
- Desktop=/components/logNames.txt
+COMPPATH="./components/" touch logNames.log
+FILE="${COMPPATH}file.sh"
 
-source fileDiff.sh
 
 echo "This is ${0}"
 
@@ -13,61 +12,90 @@ modDate=""
 
   usrName=$USER
   modDate=$(date)
-  
+
+
+#This will be used for the logging system.
+
+ echo " chose one of the options below:
+		-u to record the user name and changes that has been made
+		-e To perform error check 
+		-s To print differences. 
+		-h for help and additional information
+		-q for quit"
   
 
-function usrLogs{
+function usrLogs
+{
 	
 
-  if [ -f "$Desktop" ];
+  if [ -f "$COMPPATH" ];
 	then 
-	echo "$usrName">>"$Desktop"
+		
+	echo "$usrName">>"$COMPPATH"
 
-	echo "$modDate">>"$Desktop"
+	echo "$modDate">>"$COMPPATH"
 
-	echo "differenceVar" >> "$Desktop"
+	echo "differenceVar" >> "$COMPPATH"
 	
 
 	echo "Changes has been made to the log file " 
 	else 
 	echo "Failed to write the name :("
 	fi
+	
 
-	cat logNames.txt
+	cat logNames.log
+
+}
+
+function printErr
+{
+	if [ "$usrName" == "$USER" ]; 
+	then
+		echo "Success"
+	 	usrLogs
+	else 
+		echo "Your computer ran into some problems"
+ 	fi
 
 }
 
 
+function printStd
+{
+echo "Here are the recent changes to files and User names "
+
+cat logNames.log
+}
 
 
-
-
+function printHelp
+{
+echo "**********************************
+	welcome to Github alike program, this 
+	program allows users to create a new 
+	repository, with user names and keeps
+	 track of dates and versions
+	 ***********************************
+	 " 
+}
+ 
  
 
 
-
-
-function printErr{
-	if [ "$usrName"!=NULL && "$modDate"!=NULL ]; 
-	then
-	echo "Your computer ran into some problems"
- 	fi
-}
-
-function printStd{
-	
-}
-
- function printHelp {
-    echo "This is file component"
-}
-
-
-while getopts e:s:h-help aflag; do
-    case $aflag in
-    e) printErr;;
-    s) printStd;; 
-    h) printHelp;;
-    -help) printHelp;;
+while getopts uesh aflag;do
+    case "$aflag" in
+    u) usrLogs
+	;;
+    e) printErr
+	;;
+    s) printStd
+	;; 	
+    h) printHelp
+	;;
     esac
 done
+
+
+
+
