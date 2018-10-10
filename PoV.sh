@@ -12,9 +12,11 @@ FILE_DIFF="fileDiff.sh"
 LOG="log.sh"
 CHECK="check.sh"
 REPO="repo.sh"
-TRACK_LOG="repoTrack.log"
+
 REPO_STORE="${HOME}/repositories/"
-FILES_LIST="fileList"
+FILES_LIST="repoLog/fileList"
+FILE_CHECK="repoLog/fileCheckOut"
+TRACK_LOG="repoLog/repoTrack.log"
 
 
 function printHelp(){

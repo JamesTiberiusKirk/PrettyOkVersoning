@@ -46,8 +46,7 @@ function newRepo(){
         exit 1
     fi
     
-    #Creating a new directories for the repo 
-    mkdir $DIR
+    #Creating a new directories for the repo
     mkdir $REPO_DIR/$(basename $DIR)
     touch $DIR/$TRACK_LOG
     touch $DIR/$FILES_LIST
