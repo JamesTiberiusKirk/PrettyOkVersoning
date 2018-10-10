@@ -8,7 +8,7 @@
 #These are variables for the paths to the compoments
 COMPPATH="./components/"
 USER="${COMPPATH}user.sh"
-FILE="${COMPPATH}file.sh"
+FILE_DIFF="${COMPPATH}fileDiff.sh"
 LOG="${COMPPATH}log.sh"
 CHECK="${COMPPATH}check.sh"
 REPO="${COMPPATH}repo.sh"

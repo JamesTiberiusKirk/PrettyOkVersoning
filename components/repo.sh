@@ -89,7 +89,8 @@ function add(){
     [Y/n]"
     option="Y"
     read $option
-    if[[$option == Y -o $option == y ]]
+    
+    if [[$option == Y -o $option == y ]]
     then 
         push;;
     fi
