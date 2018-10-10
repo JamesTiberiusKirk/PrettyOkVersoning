@@ -7,11 +7,11 @@
 
 #These are variables for the paths to the compoments
 COMPPATH="./components/"
-USER="${COMPPATH}user.sh"
-FILE_DIFF="${COMPPATH}fileDiff.sh"
-LOG="${COMPPATH}log.sh"
-CHECK="${COMPPATH}check.sh"
-REPO="${COMPPATH}repo.sh"
+USER="user.sh"
+FILE_DIFF="fileDiff.sh"
+LOG="log.sh"
+CHECK="check.sh"
+REPO="repo.sh"
 TRACK_LOG="repoTrack.log"
 REPO_STORE="${HOME}/repositories/"
 FILES_LIST="fileList"
@@ -31,17 +31,17 @@ function printHelp(){
 }
 
 case $1 in
-    file) sh $FILE $2 $3 $4 $5;;
-    f) sh $FILE $2 $3 $4 $5;;
+    file) sh ${COMPPATH}${FILE} $2 $3 $4 $5;;
+    f) sh ${COMPPATH}${FILE} $2 $3 $4 $5;;
     
-    user) sh $USER $2 $3 $4 $5;;
-    u) sh $USER $2 $3 $4 $5;;
+    user) sh ${COMPPATH}${USER} $2 $3 $4 $5;;
+    u) sh ${COMPPATH}${USER} $2 $3 $4 $5;;
     
-    log) sh $LOG $2 $3 $4 $5;;
-    l) sh $LOG $2 $3 $4 $5;;
+    log) sh ${COMPPATH}${LOG} $2 $3 $4 $5;;
+    l) sh ${COMPPATH}${LOG} $2 $3 $4 $5;;
     
-    check) sh $CHECK $2 $3 $4 $5;;
-    c) sh $CHECK $2 $3 $4 $5;;
+    check) sh ${COMPPATH}${CHECK} $2 $3 $4 $5;;
+    c) sh ${COMPPATH}${CHECK} $2 $3 $4 $5;;
 
     push) sh $REPO -p;;
 esac
@@ -57,7 +57,7 @@ while getopts u:h-help aflag; do
 done
 
 function checkRepo(){
-    if[[ ! -d $REPO_SELECT]]
+    if [[ ! -d $REPO_SELECT]]
     then 
         echo "Please enter an existing repository or create a new one."
         REPO_SELECT=""
