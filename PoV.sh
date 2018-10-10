@@ -18,7 +18,7 @@ FILES_LIST="fileList"
 
 
 function printHelp(){
-    HELP_MAIN= "\
+    HELP_MAIN= "
     Welcome to the Pretty OK Versioning system.
     Usage:
       ./PoV.sh [option] [flags]
