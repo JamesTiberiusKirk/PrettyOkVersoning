@@ -33,9 +33,12 @@ elif [ "$option" -eq 2 ]
 then
 	echo "Insert the name of the file you want to edit, followed by .txt:"
 	nameEdit=""
+	d=$(date +%Y-%m-%d-%T-)
+	b="backup-"
 	read nameEdit
 	if [ -f "$nameEdit" ]
 	then
+		cp $nameEdit $b$d$nameEdit
 		nano "$nameEdit"
 	fi
 elif [ "$option" -eq 3 ]
