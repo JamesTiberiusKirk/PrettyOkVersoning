@@ -18,7 +18,7 @@ done
 
 file1=""
 file2=""
-touch differenceFile.txt
+differenceVar=""
 
 echo "Insert the name of the first file you want to compare, followed by .txt"
 read file1
@@ -39,6 +39,7 @@ else
 	echo "Second file was not found"
 fi
 
+
  checkChoice()
 {
 choice=""
@@ -46,16 +47,15 @@ choice=""
 echo "Would you like to view the conflicts? [Y/n]"
 read choice
 echo "The choice is: $choice"
-#emptying a file
->differenceFile.txt
+
 if [ "$choice" == "Y" ]; 
 then
 	diff -y "$file1" "$file2"
-	diff -y "$file1" "$file2" >> differenceFile.txt
+	diff -y "$file1" "$file2" >> differenceVar
 
 elif [ "$choice" == "n" ];
  then
-	diff -y "$file1" "$file2" >> differenceFile.txt
+	diff -y "$file1" "$file2" >> differenceVar
 
 else
 	echo "Invalid choice, please try again:"
@@ -63,3 +63,5 @@ else
 fi
 }
 checkChoice
+
+export differenceVar
