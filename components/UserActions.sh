@@ -25,7 +25,7 @@ option=""
 read option
 if [ "$option" -eq 1 ]
 then 
-	echo "Insert the name of the file you want to create, followed by .txt:"
+	echo "Insert the name of the file you want to create"
 	name=""
 	read name
 	touch $repo$name
@@ -35,7 +35,7 @@ then
 	fi
 elif [ "$option" -eq 2 ]
 then
-	echo "Insert the name of the file you want to edit, followed by .txt:"
+	echo "Insert the name of the file you want to edit"
 	nameEdit=""
 	d=$(date +%Y-%m-%d-%T-)
 	b="backup-"
@@ -57,7 +57,7 @@ then
 
 elif [ "$option" -eq 3 ]
 then 
-	echo "Insert the name of the file you want to delete, followed by .txt:"
+	echo "Insert the name of the file you want to delete"
 	nameDel=""
 	read nameDel
 	rm $repo$nameDel
@@ -67,7 +67,7 @@ then
 	fi
 elif [ "$option" -eq 4 ]
 then 
-	echo "Insert the name of the file you want to view, followed by .txt:"
+	echo "Insert the name of the file you want to view"
 	nameF=""
 	read nameF
 	cat $repo$nameF
