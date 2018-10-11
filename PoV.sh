@@ -13,10 +13,13 @@ LOG="log.sh"
 CHECK="check.sh"
 REPO="repo.sh"
 
-REPO_STORE="${HOME}/repositories/"
+REPO_DIR="${HOME}/repositories/"
 FILES_LIST="repoLog/fileList"
 FILE_CHECK="repoLog/fileCheckOut"
 TRACK_LOG="repoLog/repoTrack.log"
+LOG_FOLDER="repoLog"
+
+SELECTED_REPO="$1"
 
 
 function printHelp(){
@@ -33,39 +36,31 @@ function printHelp(){
     echo $HELP_MAIN
 }
 
-function checkRepo(){
-    echo $(${REPO_STORE}${REPO_SELECT})
-    if [[ ! -a $(${REPO_STORE}${REPO_SELECT}) ]]
-    then 
-        echo "Please enter an existing repository or create a new one."
-        REPO_SELECT=""
-        exit 1
-    fi
-    echo "Repository ${REPO_SELECT} selected"
-}
-
 case $1 in
-    use)
-        REPO_SELECT= $3
-        checkRepo;;
+     new)
+        SELECTED_REPO=""
+        . ${COMPPATH}${REPO} new $2 $3 $4 $5;;
+    list)
+        SELECTED_REPO=""
+        . ${COMPPATH}${REPO} list;;
+    "")
+        printHelp;;
+esac
 
-    user) sh ${COMPPATH}${USER} $2 $3 $4 $5;;
-    u) sh ${COMPPATH}${USER} $2 $3 $4 $5;;
+case $2 in
+    user). ${COMPPATH}${USER} $3 $4 $5;;
     
-    log) sh ${COMPPATH}${LOG} $2 $3 $4 $5;;
-    l) sh ${COMPPATH}${LOG} $2 $3 $4 $5;;
+    log). ${COMPPATH}${LOG} $3 $4 $5;;
     
-    check) sh ${COMPPATH}${CHECK} $2 $3 $4 $5;;
-    c) sh ${COMPPATH}${CHECK} $2 $3 $4 $5;;
+    check). ${COMPPATH}${CHECK} $3 $4 $5;;
 
-    push) sh ${COMPPATH}${REPO} push;;
+    push). ${COMPPATH}${REPO} push;;
 
-    new) sh ${COMPPATH}${REPO} new $3 $4 $5;;
+    clone). ${COMPPATH}${REPO} clone $4;;
 
-    clone) sh ${COMPPATH}${REPO} clone $3;;
+    add). ${COMPPATH}${REPO} add $4;;
 
-    add) sh ${COMPPATH}${REPO} add $3;;
-
-    "") printHelp;;
+    test)
+        echo $USR_SELECT;;
 esac
 
