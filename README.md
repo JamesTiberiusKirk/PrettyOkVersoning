@@ -19,18 +19,18 @@ This bash script is for a module assignment in University of Dundee.
 ### Features (From the assignment brief):
 #### Standard Functionality  
 The minimal functionality that your solution should be able to demonstrate is:  
-- [] a menu front end (individual scripts are also acceptable)
-- [] access a file repository
-- [] view a list of the files within the repository
+- [x] a menu front end (individual scripts are also acceptable) or argument based
+- [x] access a file repository
+- [] view a list of the files within the repository (CANDO EASY)
 - [] logging a file out of the repository, and back in again
-- [] creation of a log file with updates  
+- [] creation of a log file with updates  (WORKING ON IT)
 
 #### Simple Extensions  
 There are many possible extensions that you could pursue, such as:  
-- [] multi-level menus
-- [] allowing access to multiple repositories (accessed by name)
-- [] being able to edit a text file from within your script
-- [] some form of validation on what the user inputs e.g. “invalid entry” or “that file was not found”
+- [x] multi-level menus
+- [x] allowing access to multiple repositories (accessed by name)
+- [x] being able to edit a text file from within your script
+- [x] some form of validation on what the user inputs e.g. “invalid entry” or “that file was not found”
 - [] automatically listing the contents of the file repository currently in use
 - [] optionally adding user comments into log entries
 - [] automatically making backup copies of each file which is edited  

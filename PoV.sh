@@ -22,7 +22,7 @@ LOG_FOLDER="repoLog"
 SELECTED_REPO="$1"
 
 
-function printHelp(){
+printHelp(){
     #TODO: NEED TO WORK ON THIS
     HELP_MAIN= "
     Welcome to the Pretty OK Versioning system.

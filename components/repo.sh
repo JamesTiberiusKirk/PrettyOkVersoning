@@ -28,14 +28,11 @@ newRepo(){
     touch $REPO_DIR/$NAME/$FILES_LIST
 }
 
-# function push(){
-#     #Check which file from user are different to the repo
-#     #Let the user know that a certain file has a missing line, removed line or a confligt.
-#         #in case of a confligt, exit the function and let user deal with confligt
-#     #Copy the modified files from users local repo to the repo storage
-# }
+push(){
+    rsync -avun   $SOURCE $REPO_DIR/$SELECTED_REPO
+}
 
-# function pull(){
+# pull(){
 #     #Check which file from repo are different to user
 #     #Let the user know that a certain file has a missing line, removed line or a confligt.
 #         #in case of a confligt, exit the function and let user deal with confligt
@@ -58,7 +55,7 @@ clone(){
         exit 1
     fi
 
-    cp -r $REPO_DIR/$SELECTED_REPO $DIR/
+    rsync -av --exclude="${LOG_FOLDER}" $REPO_DIR/$SELECTED_REPO $DIR/
 }
 
 #Lists all of the directories
@@ -94,6 +91,7 @@ add(){
         fi
     done < "$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
 
+    #Writting to file
     echo -e "$(basename ${NEW_FILE})\n">"$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
     
 }
@@ -105,6 +103,7 @@ case "$1" in
     pull)
         pull;;
     push)
+        SOURCE="$2"
         push;;
     clone)
         DIR="$2"
@@ -117,3 +116,5 @@ case "$1" in
     *)
         exit 1;;
 esac
+
+
