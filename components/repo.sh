@@ -2,44 +2,74 @@
 
 echo "This is ${0}"
 
-while getopts n:h-help aflag; do
+#OFF FOR NOW
+# while getopts n:h-help aflag; do
+#     case $aflag in 
+#         n) 
+#             NAME= $OPTARG
+#             newRepo;;
+        
+#         push)
+#             push;;
+
+#         pull)
+#             pull;;
+        
+#         clone)
+#             $DIR= $OPTARG
+#             clone;;
+        
+#         add)
+#             $NEW_FILE= $OPTARG
+#             add;;
+
+#         h) 
+#             printHelp;;
+#         -help) printHelp;;
+#     esac
+# done
+
+case $1 in
+    new)
+        NAME= $2
+        newRepo;;
+    pull)
+        pull;;
+    push)
+        push;;
+    clone)
+        DIR= $3
+        clone;;
+    add)
+        NEW_FILE= $2
+        add;;
+    select)
+        WORKING_REPO= $2;;
+esac
+
+
+while getopts h-help aflag; do
     case $aflag in 
-        n) 
-            DIR= $OPTARG
-            newRepo;;
-        
-        push)
-            push;;
-
-        pull)
-            pull;;
-        
-        add)
-            $NEW_FILE= $OPTARG
-            add;;
-
         h) 
             printHelp;;
-        -help) printHelp;;
+        -help) 
+            printHelp;;
     esac
 done
 
+
 function printHelp(){
-    echo "This is the repo creator"
+    echo "This is the repo manager."
 }
 
+#This just simply creates a new repo in the repo folder
 function newRepo(){
-    #Checking if dir already exists
-    #It should also take care of the posibility if the dir is a file
-    if [[ -a $DIR]]
+    if [[! -a $REPO_DIR]]
     then
-        echo "File or directory exists.
-        Please give the path to a directory you want to create."
-        exit 1
+        mkdir $REPO_DIR
     fi
-    
     #Checking is the new repo name already exists
-    if [[-a $REPO_DIR/$(basename $DIR)]]
+    if [[-a $REPO_DIR/$(basename $NAME)]]
     then
         echo "Repository already exists.
         Please provide a unique name."
@@ -47,9 +77,9 @@ function newRepo(){
     fi
     
     #Creating a new directories for the repo
-    mkdir $REPO_DIR/$(basename $DIR)
-    touch $DIR/$TRACK_LOG
-    touch $DIR/$FILES_LIST
+    mkdir $REPO_DIR/$(basename $NAME)
+    touch $REPO_DIR/$(basename $NAME)/$TRACK_LOG
+    touch $REPO_DIR/$(basename $NAME)/$FILES_LIST
 }
 
 function push(){
@@ -66,7 +96,26 @@ function pull(){
     #Copy the modified files from users local repo to the repo storage
 }
 
+#This clones an existing repo into a desired path 
+function clone(){
+    #Checking is the directory exists
+    if [[ -a $DIR ]]
+    then 
+        echo "Please select a new direcory to clone the repo into."
+        exit 1
+    fi
+
+    cp $REPO_DIR/$WORKING_REPO $DIR/
+}
+
+#Lists all of the directories
+function list(){
+    ls $REPO_DIR/
+}
+
+#Adds a file to the file list
 function add(){
+    #Checking if the file exists
     if [[ ! -a $NEW_FILE]]
     then
         echo "File or directory doesnt exist.
@@ -74,23 +123,20 @@ function add(){
         exit 1
     fi
     
+    if [[! -a $WORKING_REPO/$FILE_LIST]]
+    then
+        echo "Repo file list missing."
+        exit 1
+    fi
+
     while read LINE
-        if[[ $NEW_FILE == $LINE]]
+        if[[ $WORKING_REPO/$NEW_FILE == $LINE]]
         then 
             echo "File already exists in the repository, please enter a unique name/path."
             exit 1
         fi
-    done < $FILE_LIST
+    done < $WORKING_REPO/$FILE_LIST
 
-    cat "${NEW_FILE}\n">$DIR/$FILES_LIST
-
-    echo "Would you like to push so that the file is included in the reposotory? 
-    [Y/n]"
-    option="Y"
-    read $option
-    
-    if [[$option == Y -o $option == y ]]
-    then 
-        push;;
-    fi
+    echo -e "${NEW_FILE}\n">$WORKING_REPO/$FILES_LIST
+    pull
 }
