@@ -17,8 +17,10 @@ REPO_DIR="${HOME}/repositories/"
 FILES_LIST="repoLog/fileList"
 FILE_CHECK="repoLog/fileCheckOut"
 TRACK_LOG="repoLog/repoTrack.log"
+LOG_FOLDER="repoLog"
 
 SELECTED_REPO="$1"
+
 
 function printHelp(){
     #TODO: NEED TO WORK ON THIS
@@ -37,28 +39,28 @@ function printHelp(){
 case $1 in
      new)
         SELECTED_REPO=""
-        sh ${COMPPATH}${REPO} new $3 $4 $5;;
+        . ${COMPPATH}${REPO} new $2 $3 $4 $5;;
     list)
         SELECTED_REPO=""
-        sh ${COMPPATH}${REPO} list;;
+        . ${COMPPATH}${REPO} list;;
+    "")
+        printHelp;;
 esac
 
 case $2 in
-    user) bash ${COMPPATH}${USER} $3 $4 $5;;
+    user). ${COMPPATH}${USER} $3 $4 $5;;
     
-    log) bash ${COMPPATH}${LOG} $3 $4 $5;;
+    log). ${COMPPATH}${LOG} $3 $4 $5;;
     
-    check) bash ${COMPPATH}${CHECK} $3 $4 $5;;
+    check). ${COMPPATH}${CHECK} $3 $4 $5;;
 
-    push) bash ${COMPPATH}${REPO} push;;
+    push). ${COMPPATH}${REPO} push;;
 
-    clone) bash ${COMPPATH}${REPO} clone $4;;
+    clone). ${COMPPATH}${REPO} clone $4;;
 
-    add) bash ${COMPPATH}${REPO} add $4;;
+    add). ${COMPPATH}${REPO} add $4;;
 
     test)
         echo $USR_SELECT;;
-
-    "") printHelp;;
 esac
 

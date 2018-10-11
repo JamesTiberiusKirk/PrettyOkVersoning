@@ -1,5 +1,4 @@
 #!/bin/bash
-echo "This is ${0}"
 
 printHelp(){
     echo "This is the repo manager."
@@ -7,22 +6,26 @@ printHelp(){
 
 #This just simply creates a new repo in the repo folder
 newRepo(){
-    if [[! -a $REPO_DIR]]
+    #Creates a repositories folder in case one doesnt exist
+    if [[ ! -d $REPO_DIR ]]
     then
         mkdir $REPO_DIR
     fi
+    echo $REPO_DIR/$NAME
     #Checking is the new repo name already exists
-    if [[-a $REPO_DIR/$(basename $NAME)]]
+    if [[ -d $REPO_DIR/$NAME ]]
     then
-        echo "Repository already exists.
-        Please provide a unique name."
+        echo "Repository already exists."
+        echo "Please provide a unique name."
         exit 1
     fi
     
     #Creating a new directories for the repo
-    mkdir $REPO_DIR/$(basename $NAME)
-    touch $REPO_DIR/$(basename $NAME)/$TRACK_LOG
-    touch $REPO_DIR/$(basename $NAME)/$FILES_LIST
+    mkdir $REPO_DIR/$NAME
+    mkdir $REPO_DIR/$NAME/$LOG_FOLDER
+    touch $REPO_DIR/$NAME/$TRACK_LOG
+    touch $REPO_DIR/$NAME/$FILE_CHECK
+    touch $REPO_DIR/$NAME/$FILES_LIST
 }
 
 # function push(){
@@ -42,7 +45,7 @@ newRepo(){
 #This clones an existing repo into a desired path 
 clone(){
     #Checking if the repo is present in the repo folder
-    if [ ! -d $REPO_DIR/$SELECTED_REPO]
+    if [ ! -d $REPO_DIR/$SELECTED_REPO ]
     then
         echo "Repository selected doesnt exist"
         exit 1
@@ -54,12 +57,14 @@ clone(){
         echo "Please select a new direcory to clone the repo into."
         exit 1
     fi
-
-    cp $REPO_DIR/$SELECTED_REPO $DIR/
+    
+    echo "$DIR"
+    cp -r $REPO_DIR/$SELECTED_REPO $DIR/
 }
 
 #Lists all of the directories
 list(){
+    echo "This is a list of all of the projects in the repository:"
     ls $REPO_DIR/
 }
 
@@ -93,18 +98,22 @@ add(){
     pull
 }
 
-case $1 in
+case "$1" in
     new)
-        NAME= $2
-        newRepo();;
+        NAME="$2"
+        newRepo;;
     pull)
-        pull();;
+        pull;;
     push)
-        push();;
+        push;;
     clone)
-        DIR= $2
-        clone();;
+        DIR="$2"
+        clone;;
     add)
         NEW_FILE= $2
-        add();;
+        add;;
+    list)
+        list;;
+    *)
+        exit 1;;
 esac
