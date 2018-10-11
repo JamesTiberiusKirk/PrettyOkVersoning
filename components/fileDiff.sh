@@ -18,6 +18,7 @@ done
 
 file1=""
 file2=""
+touch differenceFile.txt
 
 echo "Insert the name of the first file you want to compare, followed by .txt"
 read file1
@@ -33,21 +34,32 @@ fi
 
 if [ -f "$file2" ]
 then
+	echo "Success"
 else
 	echo "Second file was not found"
 fi
 
-choice=Y
+ checkChoice()
+{
+choice=""
 
 echo "Would you like to view the conflicts? [Y/n]"
 read choice
 echo "The choice is: $choice"
+#emptying a file
+>differenceFile.txt
+if [ "$choice" == "Y" ]; 
+then
+	diff -y "$file1" "$file2"
+	diff -y "$file1" "$file2" >> differenceFile.txt
 
-if [ "$choice"==Y ]
-then
-	vimdiff -c --report-identical-files "$file1" "$file2"
+elif [ "$choice" == "n" ];
+ then
+	diff -y "$file1" "$file2" >> differenceFile.txt
+
+else
+	echo "Invalid choice, please try again:"
+	checkChoice
 fi
-if [ "$choice"==n ]
-then
-	differenceVar= "$(vimdiff -c --report-identical-files "file1" "file2")"
-fi
+}
+checkChoice
