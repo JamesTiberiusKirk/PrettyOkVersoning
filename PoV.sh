@@ -58,7 +58,7 @@ case $2 in
 
     clone). ${COMPPATH}${REPO} clone $3;;
 
-    add). ${COMPPATH}${REPO} add $4;;
+    add). ${COMPPATH}${REPO} add $3;;
 
     test)
         echo $USR_SELECT;;

@@ -70,7 +70,7 @@ list(){
 #Adds a file to the file list
 add(){
     #Checking if the file exists
-    if [ ! -a $NEW_FILE]
+    if [[ ! -a $NEW_FILE ]]
     then
         echo "File or directory doesnt exist.
         Please give the path to an existing file or directory you want to include into the repository."
@@ -78,23 +78,24 @@ add(){
     fi
     
     #Checking for the filelist
-    if [[! -a $SELECTED_REPO/$FILE_LIST]]
+    if [[ ! -a $REPO_DIR/$SELECTED_REPO/$FILE_LIST ]]
     then
-        echo "Repo file list missing."
+        echo "Repository file list missing."
         exit 1
     fi
 
+    #To check is the file is already in the list
     while IFS= read -r LINE
     do
-        if [ $SELECTED_REPO/$NEW_FILE == $LINE]
+        if [[ $(basename ${NEW_FILE}) == $LINE ]]
         then 
             echo "File already exists in the repository, please enter a unique name/path."
             exit 1
         fi
-    done < "$SELECTED_REPO/$FILE_LIST"  
+    done < "$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
 
-    echo -e "${NEW_FILE}\n">$SELECTED_REPO/$FILES_LIST
-    pull
+    echo -e "$(basename ${NEW_FILE})\n">"$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
+    
 }
 
 case "$1" in
@@ -109,7 +110,7 @@ case "$1" in
         DIR="$2"
         clone;;
     add)
-        NEW_FILE= $2
+        NEW_FILE="$2"
         add;;
     list)
         list;;
