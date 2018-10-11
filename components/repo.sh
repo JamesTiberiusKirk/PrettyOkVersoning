@@ -52,13 +52,12 @@ clone(){
     fi
     
     #Checking is the directory exists
-    if [[ -d $DIR ]]
+    if [[ ! -d $DIR ]]
     then 
         echo "Please select a new direcory to clone the repo into."
         exit 1
     fi
-    
-    echo "$DIR"
+
     cp -r $REPO_DIR/$SELECTED_REPO $DIR/
 }
 

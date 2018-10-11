@@ -56,7 +56,7 @@ case $2 in
 
     push). ${COMPPATH}${REPO} push;;
 
-    clone). ${COMPPATH}${REPO} clone $4;;
+    clone). ${COMPPATH}${REPO} clone $3;;
 
     add). ${COMPPATH}${REPO} add $4;;
 
