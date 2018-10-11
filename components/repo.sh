@@ -29,7 +29,7 @@ newRepo(){
 }
 
 push(){
-    rsync -avun   $SOURCE $REPO_DIR/$SELECTED_REPO
+    rsync -avun --exclude="${LOG_FOLDER}" $SOURCE $REPO_DIR/$SELECTED_REPO
 }
 
 # pull(){
