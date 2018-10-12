@@ -31,7 +31,22 @@ checkOut(){
 }
 
 checkFile(){
+    #Checking is the file exist in the repo
+    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE" ]]
+    then 
+        echo "No such file present in the repository."
+        exit 1
+    fi
+    
+    #Checking is a lockfile exists
+    if [[ -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock" ]] 
+    then 
+        echo "The following user already checked out this file:"
+        cat "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"
+        exit 1
+    fi  
 
+    echo "The file is not checked out by anyone."
 }
 
 case $1 in 
@@ -41,5 +56,6 @@ case $1 in
         CHECK_OUT_FILE="$2"
         checkOut;;
     check)
+        FILE_TO_CHECK="$2"
         checkFile;;
 esac
