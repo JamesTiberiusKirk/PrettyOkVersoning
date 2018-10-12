@@ -1,41 +1,29 @@
 #!/bin/bash
-
-COMPPATH="./components/" touch logNames.log
-FILE="${COMPPATH}file.sh"
-
+TRACK_LOG="repoLog/repoTrack.log"
 
 echo "This is ${0}"
 
-
-usrName=""
-modDate=""
-
+#Assigning the  built in commands to temporary variables 
   usrName=$USER
   modDate=$(date)
-
+  differenceVar=""
 
 #This will be used for the logging system.
 
- echo " chose one of the options below:
-		-u to record the user name and changes that has been made
-		-e To perform error check 
-		-s To print differences. 
-		-h for help and additional information
-		-q for quit"
+ 
   
-
+#Check the file path if it is exists then take the name, date and differncies between two variables 
 function usrLogs
 {
+
 	
-
-  if [ -f "$COMPPATH" ];
+  if [ -f "$TRACK_LOG" ];
 	then 
-		
-	echo "$usrName">>"$COMPPATH"
+	echo "$usrName">>"$TRACK_LOG"
 
-	echo "$modDate">>"$COMPPATH"
+	echo "$modDate">>"$TRACK_LOG"
 
-	echo "differenceVar" >> "$COMPPATH"
+	echo "$differenceVar" >> "$TRACK_LOG"
 	
 
 	echo "Changes has been made to the log file " 
@@ -44,31 +32,31 @@ function usrLogs
 	fi
 	
 
-	cat logNames.log
+	cat repoTrack.log
 
 }
-
+# Functions for basic error check 
 function printErr
 {
-	if [ "$usrName" == "$USER" ]; 
+	if [ "$usrName" == "$USER" ] ;
 	then
-		echo "Success"
+		echo "Correct user name"
 	 	usrLogs
 	else 
 		echo "Your computer ran into some problems"
  	fi
 
-}
 
+}
+#Prints the log file and users 
 
 function printStd
 {
 echo "Here are the recent changes to files and User names "
 
-cat logNames.log
+cat repoTrack.log
 }
-
-
+#Prinst helps options and some info about the script 
 function printHelp
 {
 echo "**********************************
@@ -78,11 +66,14 @@ echo "**********************************
 	 track of dates and versions
 	 ***********************************
 	 " 
+echo " chose one of the options below:
+	-u to record the user name and changes that has been made
+	-e To perform error check 
+	-s To print differences. 
+	-h for help and additional information"
 }
  
- 
-
-
+# uses the flags o execute each of functions within the script
 while getopts uesh aflag;do
     case "$aflag" in
     u) usrLogs
@@ -95,7 +86,5 @@ while getopts uesh aflag;do
 	;;
     esac
 done
-
-
 
 
