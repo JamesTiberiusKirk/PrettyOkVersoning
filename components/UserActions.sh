@@ -3,8 +3,7 @@
 #This script shows a file management menu to the user
 #it allows to create, edit, delete, compare and show the content of files
 
-#variable used to store the repository where the files will be stored
-repo=/home/costin/repositories/cosRepo/
+repo=$REPO_DIR/$SELECTED_REPO
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "File management Menu"
