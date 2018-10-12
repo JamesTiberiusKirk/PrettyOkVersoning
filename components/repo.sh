@@ -24,23 +24,39 @@ newRepo(){
     mkdir $REPO_DIR/$NAME
     mkdir $REPO_DIR/$NAME/$LOG_FOLDER
     touch $REPO_DIR/$NAME/$TRACK_LOG
-    touch $REPO_DIR/$NAME/$FILE_CHECK
-    touch $REPO_DIR/$NAME/$FILES_LIST
+}
+# Tried to create a push option where it 
+push(){
+	if   [ -e $FILE_CHECK ] | [ ! -e $FILE_CHECK.lock ] 
+	then
+
+			 while IFS= read -r FILE_CHECK
+    	do
+       	 rsync -av --exclude="${LOG_FOLDER}" $SOURCE $REPO_DIR/$SELECTED_REPO
+       	 
+            echo " Files have been writen !!"
+            exit 1
+        fi
+    done < "$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
+    
+    else 
+     echo "Unfortunately this file is in use by someone  "
+
+
+
+     
 }
 
-# function push(){
-#     #Check which file from user are different to the repo
+ #Check which file from repo are different to user
 #     #Let the user know that a certain file has a missing line, removed line or a confligt.
 #         #in case of a confligt, exit the function and let user deal with confligt
 #     #Copy the modified files from users local repo to the repo storage
-# }
 
-# function pull(){
-#     #Check which file from repo are different to user
-#     #Let the user know that a certain file has a missing line, removed line or a confligt.
-#         #in case of a confligt, exit the function and let user deal with confligt
-#     #Copy the modified files from users local repo to the repo storage
-# }
+ pull(){
+ 	if [ ! -f   ]
+
+
+ }
 
 #This clones an existing repo into a desired path 
 clone(){
@@ -52,14 +68,13 @@ clone(){
     fi
     
     #Checking is the directory exists
-    if [[ -d $DIR ]]
+    if [[ ! -d $DIR ]]
     then 
         echo "Please select a new direcory to clone the repo into."
         exit 1
     fi
-    
-    echo "$DIR"
-    cp -r $REPO_DIR/$SELECTED_REPO $DIR/
+
+    rsync -av --exclude="${LOG_FOLDER}" $REPO_DIR/$SELECTED_REPO $DIR/
 }
 
 #Lists all of the directories
@@ -68,10 +83,12 @@ list(){
     ls $REPO_DIR/
 }
 
+
+##TODO: NEED TO INTEGRATE THIS IN THE CHECKOUT SYS
 #Adds a file to the file list
 add(){
     #Checking if the file exists
-    if [ ! -a $NEW_FILE]
+    if [[ ! -a $NEW_FILE ]]
     then
         echo "File or directory doesnt exist.
         Please give the path to an existing file or directory you want to include into the repository."
@@ -79,23 +96,25 @@ add(){
     fi
     
     #Checking for the filelist
-    if [[! -a $SELECTED_REPO/$FILE_LIST]]
+    if [[ ! -a $REPO_DIR/$SELECTED_REPO/$FILE_LIST ]]
     then
-        echo "Repo file list missing."
+        echo "Repository file list missing."
         exit 1
     fi
 
+    #To check is the file is already in the list
     while IFS= read -r LINE
     do
-        if [ $SELECTED_REPO/$NEW_FILE == $LINE]
+        if [[ $(basename ${NEW_FILE}) == $LINE ]]
         then 
             echo "File already exists in the repository, please enter a unique name/path."
             exit 1
         fi
-    done < "$SELECTED_REPO/$FILE_LIST"  
+    done < "$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
 
-    echo -e "${NEW_FILE}\n">$SELECTED_REPO/$FILES_LIST
-    pull
+    #Writting to file
+    echo -e "$(basename ${NEW_FILE})\n">"$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
+    
 }
 
 case "$1" in
@@ -105,6 +124,7 @@ case "$1" in
     pull)
         pull;;
     push)
+        SOURCE="$2"
         push;;
     clone)
         DIR="$2"
@@ -117,3 +137,5 @@ case "$1" in
     *)
         exit 1;;
 esac
+
+
