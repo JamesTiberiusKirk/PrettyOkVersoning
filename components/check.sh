@@ -5,7 +5,21 @@
 echo "This is ${0}"
 
 checkIn(){
+    #Checking is the file exist in the repo
+    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE" ]]
+    then 
+        echo "File is not present in the repository."
+        exit 1
+    fi
+    
+    #Checking is a lockfile exists
+    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock" ]] 
+    then 
+        echo "The file has not been checked out."
+        exit 1
+    fi  
 
+    rm "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"    
 }
 
 checkOut(){
@@ -32,17 +46,17 @@ checkOut(){
 
 checkFile(){
     #Checking is the file exist in the repo
-    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE" ]]
+    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$FILE_TO_CHECK" ]]
     then 
         echo "No such file present in the repository."
         exit 1
     fi
     
     #Checking is a lockfile exists
-    if [[ -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock" ]] 
+    if [[ -e "$REPO_DIR/$SELECTED_REPO/$FILE_TO_CHECK.lock" ]] 
     then 
         echo "The following user already checked out this file:"
-        cat "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"
+        cat "$REPO_DIR/$SELECTED_REPO/$FILE_TO_CHECK.lock"
         exit 1
     fi  
 
@@ -59,3 +73,5 @@ case $1 in
         FILE_TO_CHECK="$2"
         checkFile;;
 esac
+
+

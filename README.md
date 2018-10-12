@@ -21,8 +21,8 @@ This bash script is for a module assignment in University of Dundee.
 The minimal functionality that your solution should be able to demonstrate is:  
 - [x] a menu front end (individual scripts are also acceptable) or argument based
 - [x] access a file repository
-- [] view a list of the files within the repository (CANDO EASY)
-- [] logging a file out of the repository, and back in again
+- [x] view a list of the files within the repository
+- [x] logging a file out of the repository, and back in again
 - [] creation of a log file with updates  (WORKING ON IT)
 
 #### Simple Extensions  

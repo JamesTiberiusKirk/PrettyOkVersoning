@@ -24,8 +24,6 @@ newRepo(){
     mkdir $REPO_DIR/$NAME
     mkdir $REPO_DIR/$NAME/$LOG_FOLDER
     touch $REPO_DIR/$NAME/$TRACK_LOG
-    touch $REPO_DIR/$NAME/$FILE_CHECK
-    touch $REPO_DIR/$NAME/$FILES_LIST
 }
 
 push(){
@@ -64,6 +62,8 @@ list(){
     ls $REPO_DIR/
 }
 
+
+##TODO: NEED TO INTEGRATE THIS IN THE CHECKOUT SYS
 #Adds a file to the file list
 add(){
     #Checking if the file exists

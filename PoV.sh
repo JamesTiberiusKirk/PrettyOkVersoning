@@ -15,8 +15,6 @@ REPO="repo.sh"
 USER_ACTIONS="UserActions.sh"
 
 REPO_DIR="${HOME}/repositories/"
-FILES_LIST="repoLog/fileList"
-FILE_CHECK="repoLog/fileCheckOut"
 TRACK_LOG="repoLog/repoTrack.log"
 LOG_FOLDER="repoLog"
 
