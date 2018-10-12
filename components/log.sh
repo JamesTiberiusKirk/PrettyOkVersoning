@@ -1,18 +1,12 @@
 #!/bin/bash
-
-COMPPATH="./components/" touch logNames.log
-FILE="${COMPPATH}file.sh"
-
+TRACK_LOG="repoLog/repoTrack.log"
 
 echo "This is ${0}"
 
 
-usrName=""
-modDate=""
-
   usrName=$USER
   modDate=$(date)
-
+  differenceVar=""
 
 #This will be used for the logging system.
 
@@ -21,21 +15,20 @@ modDate=""
 		-e To perform error check 
 		-s To print differences. 
 		-h for help and additional information
-		-q for quit"
+		-d "
   
 
 function usrLogs
 {
+
 	
-
-  if [ -f "$COMPPATH" ];
+  if [ -f "$TRACK_LOG" ];
 	then 
-		
-	echo "$usrName">>"$COMPPATH"
+	echo "$usrName">>"$TRACK_LOG"
 
-	echo "$modDate">>"$COMPPATH"
+	echo "$modDate">>"$TRACK_LOG"
 
-	echo "differenceVar" >> "$COMPPATH"
+	echo "$differenceVar" >> "$TRACK_LOG"
 	
 
 	echo "Changes has been made to the log file " 
@@ -44,30 +37,33 @@ function usrLogs
 	fi
 	
 
-	cat logNames.log
+	cat repoTrack.log
 
 }
 
 function printErr
 {
-	if [ "$usrName" == "$USER" ]; 
+	if [ "$usrName" == "$USER" ] ;
 	then
-		echo "Success"
+		echo "Correct user name"
 	 	usrLogs
 	else 
 		echo "Your computer ran into some problems"
  	fi
 
-}
 
+}
+function differntFiles{
+
+
+}
 
 function printStd
 {
 echo "Here are the recent changes to files and User names "
 
-cat logNames.log
+cat repoTrack.log
 }
-
 
 function printHelp
 {
@@ -80,8 +76,6 @@ echo "**********************************
 	 " 
 }
  
- 
-
 
 while getopts uesh aflag;do
     case "$aflag" in
@@ -95,7 +89,5 @@ while getopts uesh aflag;do
 	;;
     esac
 done
-
-
 
 
