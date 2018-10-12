@@ -110,7 +110,7 @@ case "$1" in
         DIR="$2"
         clone;;
     add)
-        NEW_FILE= $2
+        NEW_FILE="$2"
         add;;
     list)
         list;;

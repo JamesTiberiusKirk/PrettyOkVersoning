@@ -28,7 +28,7 @@ function printHelp(){
     Welcome to the Pretty OK Versioning system.
     Usage:
       ./PoV.sh [option]:[options]
-         new <new repository>                                        - to create a new repository
+        new <new repository>                                        - to create a new repository
         list                                                        - to list all repositories
 
       ./Pov.sh <working repository> [options]:[options]
@@ -51,19 +51,23 @@ case $1 in
 esac
 
 case $2 in
-    user). ${COMPPATH}${USER} $3 $4 $5;;
+    user)
+        . ${COMPPATH}${USER} $3 $4 $5;;
     
-    log). ${COMPPATH}${LOG} $3 $4 $5;;
+    log)
+        . ${COMPPATH}${LOG} $3 $4 $5;;
     
-    check). ${COMPPATH}${CHECK} $3 $4 $5;;
+    check)
+        . ${COMPPATH}${CHECK} $3 $4 $5;;
 
-    push). ${COMPPATH}${REPO} push;;
+    push)
+        . ${COMPPATH}${REPO} push;;
 
-    clone). ${COMPPATH}${REPO} clone $4;;
+    clone)
+        . ${COMPPATH}${REPO} clone $4;;
 
-    add). ${COMPPATH}${REPO} add $4;;
+    add)
+        . ${COMPPATH}${REPO} add $4;;
 
-    test)
-        echo $USR_SELECT;;
 esac
 
