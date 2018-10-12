@@ -17,6 +17,7 @@ USER_ACTIONS="UserActions.sh"
 REPO_DIR="${HOME}/repositories/"
 TRACK_LOG="repoLog/repoTrack.log"
 LOG_FOLDER="repoLog"
+FILE_CHECK="checkedOutFiles"
 
 SELECTED_REPO="$1"
 
@@ -42,9 +43,7 @@ case $1 in
     list)
         SELECTED_REPO=""
         . ${COMPPATH}${REPO} list;;
-    filemon)
-        SELECTED_REPO=""
-        . ${COMPPATH}${USER_ACTIONS};;
+    
     "")
         printHelp;;
 esac
@@ -61,7 +60,9 @@ case $2 in
     clone). ${COMPPATH}${REPO} clone $3;;
 
     add). ${COMPPATH}${REPO} add $3;;
-
+    
+    filemon). ${COMPPATH}${USER_ACTIONS};;
+    
     test)
         echo $USR_SELECT;;
 esac
