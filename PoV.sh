@@ -28,10 +28,13 @@ function printHelp(){
     Welcome to the Pretty OK Versioning system.
     Usage:
       ./PoV.sh [option]:[options]
-    Options and their suboptions:
-      repo
-        -n [name] for a new repo
-        -a [file/directory name] to add a file to the version tracking
+         new <new repository>                                        - to create a new repository
+        list                                                        - to list all repositories
+
+      ./Pov.sh <working repository> [options]:[options]
+        <working repository> clone <path to user project folder>    - clones the repo from repositories folder to a user folder
+        <working repository> add <file path>                        - enters a new file to the file list
+        <working repository> filemon                                - interactive menu for file manipulation
     "
     echo $HELP_MAIN
 }
