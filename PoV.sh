@@ -12,6 +12,7 @@ FILE_DIFF="fileDiff.sh"
 LOG="log.sh"
 CHECK="check.sh"
 REPO="repo.sh"
+USER_ACTIONS="UserActions.sh"
 
 REPO_DIR="${HOME}/repositories/"
 FILES_LIST="repoLog/fileList"
@@ -43,6 +44,9 @@ case $1 in
     list)
         SELECTED_REPO=""
         . ${COMPPATH}${REPO} list;;
+    filemon)
+        SELECTED_REPO=""
+        . ${COMPPATH}${USER_ACTIONS};;
     "")
         printHelp;;
 esac
