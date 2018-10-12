@@ -3,21 +3,16 @@ TRACK_LOG="repoLog/repoTrack.log"
 
 echo "This is ${0}"
 
-
+#Assigning the  built in commands to temporary variables 
   usrName=$USER
   modDate=$(date)
   differenceVar=""
 
 #This will be used for the logging system.
 
- echo " chose one of the options below:
-		-u to record the user name and changes that has been made
-		-e To perform error check 
-		-s To print differences. 
-		-h for help and additional information
-		-d "
+ 
   
-
+#Check the file path if it is exists then take the name, date and differncies between two variables 
 function usrLogs
 {
 
@@ -40,7 +35,7 @@ function usrLogs
 	cat repoTrack.log
 
 }
-
+# Functions for basic error check 
 function printErr
 {
 	if [ "$usrName" == "$USER" ] ;
@@ -53,10 +48,7 @@ function printErr
 
 
 }
-function differntFiles{
-
-
-}
+#Prints the log file and users 
 
 function printStd
 {
@@ -64,7 +56,7 @@ echo "Here are the recent changes to files and User names "
 
 cat repoTrack.log
 }
-
+#Prinst helps options and some info about the script 
 function printHelp
 {
 echo "**********************************
@@ -74,9 +66,14 @@ echo "**********************************
 	 track of dates and versions
 	 ***********************************
 	 " 
+echo " chose one of the options below:
+	-u to record the user name and changes that has been made
+	-e To perform error check 
+	-s To print differences. 
+	-h for help and additional information"
 }
  
-
+# uses the flags o execute each of functions within the script
 while getopts uesh aflag;do
     case "$aflag" in
     u) usrLogs

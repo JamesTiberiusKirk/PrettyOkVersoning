@@ -27,10 +27,10 @@ The minimal functionality that your solution should be able to demonstrate is:
 
 #### Simple Extensions  
 There are many possible extensions that you could pursue, such as:  
-- [x] multi-level menus
-- [x] allowing access to multiple repositories (accessed by name)
-- [x] being able to edit a text file from within your script
-- [x] some form of validation on what the user inputs e.g. “invalid entry” or “that file was not found”
+- [] multi-level menus
+- [] allowing access to multiple repositories (accessed by name)
+- [] being able to edit a text file from within your script
+- [] some form of validation on what the user inputs e.g. “invalid entry” or “that file was not found”
 - [] automatically listing the contents of the file repository currently in use
 - [] optionally adding user comments into log entries
 - [] automatically making backup copies of each file which is edited  

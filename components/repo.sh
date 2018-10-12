@@ -24,13 +24,18 @@ newRepo(){
     mkdir $REPO_DIR/$NAME
     mkdir $REPO_DIR/$NAME/$LOG_FOLDER
     touch $REPO_DIR/$NAME/$TRACK_LOG
+    touch $REPO_DIR/$NAME/$FILE_CHECK
+    touch $REPO_DIR/$NAME/$FILES_LIST
 }
 
-push(){
-    rsync -avun --exclude="${LOG_FOLDER}" $SOURCE $REPO_DIR/$SELECTED_REPO
-}
+# function push(){
+#     #Check which file from user are different to the repo
+#     #Let the user know that a certain file has a missing line, removed line or a confligt.
+#         #in case of a confligt, exit the function and let user deal with confligt
+#     #Copy the modified files from users local repo to the repo storage
+# }
 
-# pull(){
+# function pull(){
 #     #Check which file from repo are different to user
 #     #Let the user know that a certain file has a missing line, removed line or a confligt.
 #         #in case of a confligt, exit the function and let user deal with confligt
@@ -47,13 +52,14 @@ clone(){
     fi
     
     #Checking is the directory exists
-    if [[ ! -d $DIR ]]
+    if [[ -d $DIR ]]
     then 
         echo "Please select a new direcory to clone the repo into."
         exit 1
     fi
-
-    rsync -av --exclude="${LOG_FOLDER}" $REPO_DIR/$SELECTED_REPO $DIR/
+    
+    echo "$DIR"
+    cp -r $REPO_DIR/$SELECTED_REPO $DIR/
 }
 
 #Lists all of the directories
@@ -62,12 +68,10 @@ list(){
     ls $REPO_DIR/
 }
 
-
-##TODO: NEED TO INTEGRATE THIS IN THE CHECKOUT SYS
 #Adds a file to the file list
 add(){
     #Checking if the file exists
-    if [[ ! -a $NEW_FILE ]]
+    if [ ! -a $NEW_FILE]
     then
         echo "File or directory doesnt exist.
         Please give the path to an existing file or directory you want to include into the repository."
@@ -75,25 +79,23 @@ add(){
     fi
     
     #Checking for the filelist
-    if [[ ! -a $REPO_DIR/$SELECTED_REPO/$FILE_LIST ]]
+    if [[! -a $SELECTED_REPO/$FILE_LIST]]
     then
-        echo "Repository file list missing."
+        echo "Repo file list missing."
         exit 1
     fi
 
-    #To check is the file is already in the list
     while IFS= read -r LINE
     do
-        if [[ $(basename ${NEW_FILE}) == $LINE ]]
+        if [ $SELECTED_REPO/$NEW_FILE == $LINE]
         then 
             echo "File already exists in the repository, please enter a unique name/path."
             exit 1
         fi
-    done < "$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
+    done < "$SELECTED_REPO/$FILE_LIST"  
 
-    #Writting to file
-    echo -e "$(basename ${NEW_FILE})\n">"$REPO_DIR/$SELECTED_REPO/$FILES_LIST"
-    
+    echo -e "${NEW_FILE}\n">$SELECTED_REPO/$FILES_LIST
+    pull
 }
 
 case "$1" in
@@ -103,18 +105,15 @@ case "$1" in
     pull)
         pull;;
     push)
-        SOURCE="$2"
         push;;
     clone)
         DIR="$2"
         clone;;
     add)
-        NEW_FILE="$2"
+        NEW_FILE= $2
         add;;
     list)
         list;;
     *)
         exit 1;;
 esac
-
-

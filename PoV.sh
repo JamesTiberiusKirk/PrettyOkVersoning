@@ -12,17 +12,17 @@ FILE_DIFF="fileDiff.sh"
 LOG="log.sh"
 CHECK="check.sh"
 REPO="repo.sh"
-USER_ACTIONS="UserActions.sh"
 
 REPO_DIR="${HOME}/repositories/"
+FILES_LIST="repoLog/fileList"
+FILE_CHECK="repoLog/fileCheckOut"
 TRACK_LOG="repoLog/repoTrack.log"
 LOG_FOLDER="repoLog"
-FILE_CHECK="checkedOutFiles"
 
 SELECTED_REPO="$1"
 
 
-printHelp(){
+function printHelp(){
     #TODO: NEED TO WORK ON THIS
     HELP_MAIN= "
     Welcome to the Pretty OK Versioning system.
@@ -43,7 +43,6 @@ case $1 in
     list)
         SELECTED_REPO=""
         . ${COMPPATH}${REPO} list;;
-    
     "")
         printHelp;;
 esac
@@ -57,12 +56,10 @@ case $2 in
 
     push). ${COMPPATH}${REPO} push;;
 
-    clone). ${COMPPATH}${REPO} clone $3;;
+    clone). ${COMPPATH}${REPO} clone $4;;
 
-    add). ${COMPPATH}${REPO} add $3;;
-    
-    filemon). ${COMPPATH}${USER_ACTIONS};;
-    
+    add). ${COMPPATH}${REPO} add $4;;
+
     test)
         echo $USR_SELECT;;
 esac
