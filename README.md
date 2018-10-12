@@ -23,7 +23,7 @@ The minimal functionality that your solution should be able to demonstrate is:
 - [x] access a file repository
 - [x] view a list of the files within the repository
 - [x] logging a file out of the repository, and back in again
-- [] creation of a log file with updates  (WORKING ON IT)
+- [x] creation of a log file with updates  (WORKING ON IT)
 
 #### Simple Extensions  
 There are many possible extensions that you could pursue, such as:  
