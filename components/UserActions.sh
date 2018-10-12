@@ -2,7 +2,7 @@
 
 #This script checks files that have been edited and the user responsible for it
 
-repo=/home/costin/repositories/cosRepo/
+repo=$REPO_DIR/$SELECTED_REPO
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "File management Menu"
