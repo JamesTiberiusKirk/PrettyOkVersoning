@@ -4,15 +4,42 @@
 
 echo "This is ${0}"
 
+checkIn(){
 
-function printHelp(){
-    echo "This is file component"
 }
 
+checkOut(){
+    #Checking is the file exist in the repo
+    if [[ ! -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE" ]]
+    then 
+        echo "File is not present in the repository."
+        echo "Have you added the file and pushed it?"
+        exit 1
+    fi
+    
+    #Checking is a lockfile exists
+    if [[ -e "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock" ]] 
+    then 
+        echo "The following user already checked out this file:"
+        cat "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"
+        exit 1
+    fi  
 
-while getopts h-help aflag; do
-    case $aflag in 
-    h) printHelp;;
-    -help) printHelp;;
-    esac
-done
+    #Creating a lock file
+    touch "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"
+    echo "$USER @ $(date)" > "$REPO_DIR/$SELECTED_REPO/$CHECK_OUT_FILE.lock"
+}
+
+checkFile(){
+
+}
+
+case $1 in 
+    in)
+        checkIn;;
+    out)
+        CHECK_OUT_FILE="$2"
+        checkOut;;
+    check)
+        checkFile;;
+esac
